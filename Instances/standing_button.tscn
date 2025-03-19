@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6om12gpghe1t"]
+
+[ext_resource type="Script" uid="uid://dos15ejihidbt" path="res://Scripts/Standing_Button.gd" id="1_3f2xc"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_036b0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dwbse"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pkg7o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbfbk"]
+albedo_color = Color(0.905882, 0.0980392, 0, 1)
+
+[node name="Standing Button" type="StaticBody3D"]
+script = ExtResource("1_3f2xc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 2.16505, -0.07902, 0)
+mesh = SubResource("CylinderMesh_036b0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16163, 0, 0)
+shape = SubResource("CylinderShape3D_dwbse")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 2.16269, 0.900695, 0)
+mesh = SubResource("SphereMesh_pkg7o")
+surface_material_override/0 = SubResource("StandardMaterial3D_gbfbk")

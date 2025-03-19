@@ -10,4 +10,4 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	emit_signal("touched")
-	print("this should open the door")
+	#print("this should open the door")

@@ -1,19 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6om12gpghe1t"]
 
-[ext_resource type="Script" uid="uid://bj6qeai8s8v3" path="res://Scripts/standing_button.gd" id="1_vuwu8"]
+[ext_resource type="Script" uid="uid://bj6qeai8s8v3" path="res://Scripts/interactable.gd" id="1_vuwu8"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_036b0"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_dwbse"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_pkg7o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbfbk"]
 albedo_color = Color(0.905882, 0.0980392, 0, 1)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dwbse"]
+
 [node name="Standing Button" type="StaticBody3D"]
 script = ExtResource("1_vuwu8")
 
+<<<<<<< HEAD:Instances/Button_Stand.tscn
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("CylinderMesh_036b0")
@@ -21,9 +21,21 @@ mesh = SubResource("CylinderMesh_036b0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_dwbse")
 
+=======
+[node name="Stand" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("CylinderMesh_036b0")
+
+>>>>>>> 83a5ef2f49565674afeaa63cf2e32ead17e9b6a5:Instances/standing_button.tscn
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.901, 0)
 mesh = SubResource("SphereMesh_pkg7o")
 surface_material_override/0 = SubResource("StandardMaterial3D_gbfbk")
 
+<<<<<<< HEAD:Instances/Button_Stand.tscn
 [connection signal="touched" from="." to="." method="_on_touched"]
+=======
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452654, 0, 0)
+shape = SubResource("CylinderShape3D_dwbse")
+>>>>>>> 83a5ef2f49565674afeaa63cf2e32ead17e9b6a5:Instances/standing_button.tscn

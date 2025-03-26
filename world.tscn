@@ -2,10 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://ixijbmta3kxr" path="res://Instances/Player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://bt3pir55cg21r" path="res://Scripts/World.gd" id="1_tlwt5"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://b6om12gpghe1t" path="res://Instances/Button_Stand.tscn" id="3_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://dnlk0a1ng1q10" path="res://Instances/box.tscn" id="3_dwbse"]
 [ext_resource type="PackedScene" uid="uid://3oetpb0fhym5" path="res://Instances/Button_Floor.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://cs7x5r4rqpvf5" path="res://Instances/door.tscn" id="4_dwbse"]
+=======
+[ext_resource type="PackedScene" uid="uid://b6om12gpghe1t" path="res://Instances/standing_button.tscn" id="3_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://drorga0pmg1vj" path="res://Instances/box.tscn" id="3_dwbse"]
+[ext_resource type="PackedScene" uid="uid://3oetpb0fhym5" path="res://Instances/floor_button.tscn" id="4_036b0"]
+[ext_resource type="PackedScene" uid="uid://ctdoe1sig8m48" path="res://Instances/door.tscn" id="5_dwbse"]
+>>>>>>> 83a5ef2f49565674afeaa63cf2e32ead17e9b6a5
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -33,6 +40,7 @@ environment = SubResource("Environment_aqk2v")
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 transform = Transform3D(0.119409, 0, -0.992845, 0, 1, 0, 0.992845, 0, 0.119409, -3.15775, 0, 9.96043)
 
+<<<<<<< HEAD
 [node name="Level" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Level"]
@@ -55,6 +63,16 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.361
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.8359, -9.53674e-07, -1.23522)
 
 [node name="Geometry" type="Node3D" parent="Level/Room1"]
+=======
+[node name="Box" parent="." instance=ExtResource("3_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.00829)
+
+[node name="Standing Button" parent="." instance=ExtResource("3_aqk2v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0418671, -0.280439, 0)
+
+[node name="Door" parent="." instance=ExtResource("5_dwbse")]
+transform = Transform3D(1.745, 0, 0, 0, 1.745, 0, 0, 0, 1.745, 4.76374, 0.422639, -0.470842)
+>>>>>>> 83a5ef2f49565674afeaa63cf2e32ead17e9b6a5
 
 [node name="Wall-back" type="CSGBox3D" parent="Level/Room1/Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0357, 4.59181, -8.77272)

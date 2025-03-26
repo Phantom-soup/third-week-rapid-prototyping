@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [gd_scene load_steps=17 format=3 uid="uid://cs7x5r4rqpvf5"]
 
 [ext_resource type="Script" uid="uid://c0qo17h507e4a" path="res://Scripts/door.gd" id="1_r8ca6"]
@@ -135,3 +136,27 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_gcyt8")
 anim_player = NodePath("../AnimationPlayer")
+=======
+[gd_scene load_steps=5 format=3 uid="uid://ctdoe1sig8m48"]
+
+[ext_resource type="Script" uid="uid://c0qo17h507e4a" path="res://Scripts/door.gd" id="1_r8ca6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pkg7o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkg7o"]
+albedo_color = Color(0.329412, 1, 0.337255, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gbfbk"]
+size = Vector3(0.126953, 1, 1)
+
+[node name="Door" type="StaticBody3D"]
+script = ExtResource("1_r8ca6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_pkg7o")
+surface_material_override/0 = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gbfbk")
+>>>>>>> 83a5ef2f49565674afeaa63cf2e32ead17e9b6a5

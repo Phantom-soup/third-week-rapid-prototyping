@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ixijbmta3kxr"]
+[gd_scene load_steps=5 format=3 uid="uid://ixijbmta3kxr"]
 
 [ext_resource type="Script" uid="uid://cc6ptiy5gh1th" path="res://Scripts/Player.gd" id="1_qdowt"]
+[ext_resource type="Script" uid="uid://5ej0hltwsa3" path="res://Scripts/Raycast.gd" id="2_xj6jh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gv5m4"]
 
@@ -24,6 +25,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65069, 0)
 
 [node name="Interaction" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -5)
+script = ExtResource("2_xj6jh")
+
+[node name="Prompt" type="Label" parent="Head/Camera3D/Interaction"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 
 [node name="Hand" type="Marker3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)

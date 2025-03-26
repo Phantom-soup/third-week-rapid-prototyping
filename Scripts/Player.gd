@@ -6,9 +6,10 @@ extends CharacterBody3D
 @onready var hand = $Head/Camera3D/Hand
 
 #Movement
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.007
+@export var speed = 5.0
+@export var accel = 16.0
+@export var jump = 4.5
+const sensitivity = 0.007
 
 #Interactions
 var picked_object
@@ -21,10 +22,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
-
+		head.rotate_y(-event.relative.x * sensitivity)
+		camera.rotate_x(-event.relative.y * sensitivity)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func pickup_object():
 	var collider = interaction.get_collider()
@@ -34,10 +34,6 @@ func pickup_object():
 func drop_object():
 	if picked_object != null:
 		picked_object = null
-
-func press_button():
-	var collider = interaction.get_collider()
-
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Interaction"):
@@ -52,16 +48,16 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump
 	
 	var input_dir := Input.get_vector("Left", "Right", "Up", "Down")
 	var direction = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = lerp(velocity.x, direction.x * speed, accel * delta)
+		velocity.z = lerp(velocity.z, direction.z * speed, accel * delta)
 	else:
-		velocity.x = 0
-		velocity.z = 0
+		velocity.x = lerp(velocity.x, 0.0, accel * delta)
+		velocity.z = lerp(velocity.z, 0.0, accel * delta)
 	
 	move_and_slide()
 	

@@ -1,13 +1,6 @@
-extends StaticBody3D
+extends Interactable
 
-signal touched
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+
+func _on_touched(body: Variant) -> void:
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	emit_signal("touched")
-	print("this should open the door")

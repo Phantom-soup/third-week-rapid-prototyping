@@ -1,0 +1,137 @@
+[gd_scene load_steps=17 format=3 uid="uid://cs7x5r4rqpvf5"]
+
+[ext_resource type="Script" uid="uid://c0qo17h507e4a" path="res://Scripts/door.gd" id="1_r8ca6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hcen8"]
+size = Vector3(1.5, 2.5, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8ca6"]
+albedo_color = Color(0.333333, 0.945098, 0.396078, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r8ca6"]
+size = Vector3(1.48145, 2.5188, 0.147461)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gntdg"]
+size = Vector3(1.5, 2.5, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gntdg"]
+albedo_color = Color(0.333333, 0.945098, 0.396078, 1)
+
+[sub_resource type="Animation" id="Animation_mvdy1"]
+resource_name = "Door_Close"
+length = 0.2
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftDoor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -1.02158, 0, 0, 0.2, 1, 0, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightDoor")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 1, 0, 0, 0.2, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_r8ca6"]
+resource_name = "Door_Open"
+length = 0.2
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftDoor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, -1.02158, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightDoor")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, 1, 0, 0)
+
+[sub_resource type="Animation" id="Animation_gntdg"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftDoor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightDoor")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g7uwx"]
+_data = {
+&"Door_Close": SubResource("Animation_mvdy1"),
+&"Door_Open": SubResource("Animation_r8ca6"),
+&"RESET": SubResource("Animation_gntdg")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hcen8"]
+animation = &"Door_Close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r8ca6"]
+animation = &"Door_Open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gntdg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mvdy1"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g7uwx"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gcyt8"]
+states/Door_Close/node = SubResource("AnimationNodeAnimation_hcen8")
+states/Door_Close/position = Vector2(353, 198)
+states/Door_Open/node = SubResource("AnimationNodeAnimation_r8ca6")
+states/Door_Open/position = Vector2(353, 54)
+states/Start/position = Vector2(180, 100)
+transitions = ["Start", "Door_Close", SubResource("AnimationNodeStateMachineTransition_gntdg"), "Door_Close", "Door_Open", SubResource("AnimationNodeStateMachineTransition_mvdy1"), "Door_Open", "Door_Close", SubResource("AnimationNodeStateMachineTransition_g7uwx")]
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_r8ca6")
+
+[node name="LeftDoor" type="StaticBody3D" parent="."]
+
+[node name="LeftDoor" type="MeshInstance3D" parent="LeftDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.25, 0)
+mesh = SubResource("BoxMesh_hcen8")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_r8ca6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.25, 0)
+shape = SubResource("BoxShape3D_r8ca6")
+
+[node name="RightDoor" type="StaticBody3D" parent="."]
+
+[node name="RightDoor" type="MeshInstance3D" parent="RightDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+mesh = SubResource("BoxMesh_gntdg")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_gntdg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RightDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+shape = SubResource("BoxShape3D_r8ca6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g7uwx")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_gcyt8")
+anim_player = NodePath("../AnimationPlayer")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://de7lufg3nef63"]
+[gd_scene load_steps=10 format=3 uid="uid://de7lufg3nef63"]
 
 [ext_resource type="PackedScene" uid="uid://ixijbmta3kxr" path="res://Instances/Player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://bt3pir55cg21r" path="res://Scripts/World.gd" id="1_tlwt5"]
-[ext_resource type="PackedScene" uid="uid://b6om12gpghe1t" path="res://Instances/standing_button.tscn" id="3_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://3oetpb0fhym5" path="res://Instances/floor_button.tscn" id="4_036b0"]
-[ext_resource type="Script" uid="uid://c0qo17h507e4a" path="res://Scripts/door.gd" id="4_dwbse"]
+[ext_resource type="PackedScene" uid="uid://b6om12gpghe1t" path="res://Instances/Button_Stand.tscn" id="3_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://dnlk0a1ng1q10" path="res://Instances/box.tscn" id="3_dwbse"]
+[ext_resource type="PackedScene" uid="uid://3oetpb0fhym5" path="res://Instances/Button_Floor.tscn" id="4_036b0"]
+[ext_resource type="PackedScene" uid="uid://cs7x5r4rqpvf5" path="res://Instances/door.tscn" id="4_dwbse"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,69 +19,111 @@ background_mode = 2
 sky = SubResource("Sky_tlwt5")
 tonemap_mode = 2
 
-[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwbse"]
-albedo_color = Color(0.254902, 0.34902, 1, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fj7yv"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_pkg7o"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkg7o"]
-albedo_color = Color(0.329412, 1, 0.337255, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gbfbk"]
-size = Vector3(0.126953, 1, 1)
-
 [node name="World" type="Node3D"]
 script = ExtResource("1_tlwt5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(0.54537, -0.832517, -0.0973991, 0.23361, 0.0393715, 0.971533, -0.804983, -0.552598, 0.215956, -0.0160332, 0, 0)
+light_color = Color(0.270588, 0.168627, 1, 1)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aqk2v")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4995, 0)
-use_collision = true
-size = Vector3(18, 0.001, 18)
-
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.15775, 0, 0)
+transform = Transform3D(0.119409, 0, -0.992845, 0, 1, 0, 0.992845, 0, 0.119409, -3.15775, 0, 9.96043)
 
-[node name="Box" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.00829)
+[node name="Level" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
-transform = Transform3D(0.999999, -0.00132645, 0, 0.00132645, 0.999999, 0, 0, 0, 1, 0, 0.125632, 0)
-mesh = SubResource("BoxMesh_f3sb7")
-surface_material_override/0 = SubResource("StandardMaterial3D_dwbse")
+[node name="Floor" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5423, 0, 20.0872)
+use_collision = true
+size = Vector3(60.525, 0.001, 76.7367)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
-shape = SubResource("BoxShape3D_fj7yv")
+[node name="Ceiling" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.30939, 9.39516, -0.253677)
+use_collision = true
+size = Vector3(34.6188, 0.001, 17.4926)
 
-[node name="Standing Button" parent="." instance=ExtResource("3_aqk2v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0418671, -0.280439, 0)
+[node name="Room1" type="Node3D" parent="Level"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 21.4636)
 
-[node name="Door" type="StaticBody3D" parent="."]
-transform = Transform3D(1.745, 0, 0, 0, 1.745, 0, 0, 0, 1.745, 4.76374, 0.422639, -0.470842)
-script = ExtResource("4_dwbse")
+[node name="Standing Button" parent="Level/Room1" instance=ExtResource("3_aqk2v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.3611, 0.919608, 0.791535)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_pkg7o")
-surface_material_override/0 = SubResource("StandardMaterial3D_pkg7o")
+[node name="Door" parent="Level/Room1" instance=ExtResource("4_dwbse")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.8359, -9.53674e-07, -1.23522)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_gbfbk")
+[node name="Geometry" type="Node3D" parent="Level/Room1"]
 
-[node name="Floor Button" parent="." instance=ExtResource("4_036b0")]
-transform = Transform3D(1.745, 0, 0, 0, 1.745, 0, 0, 0, 1.745, -1.75002, -0.439035, -5.63994)
+[node name="Wall-back" type="CSGBox3D" parent="Level/Room1/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0357, 4.59181, -8.77272)
+use_collision = true
+size = Vector3(18.0977, 9.67773, 1)
 
-[connection signal="touched" from="Standing Button" to="." method="_on_standing_button_touched"]
-[connection signal="pressed" from="Floor Button" to="." method="_on_floor_button_pressed"]
-[connection signal="release" from="Floor Button" to="." method="_on_floor_button_release"]
+[node name="Other Wall" type="CSGBox3D" parent="Level/Room1/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88587, 4.59181, -0.237173)
+use_collision = true
+size = Vector3(0.374023, 9.67773, 17.1783)
+
+[node name="Exit-Door-Wall-L" type="CSGBox3D" parent="Level/Room1/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8782, 4.59181, -9.51958)
+use_collision = true
+size = Vector3(0.374023, 9.67773, 13.8523)
+
+[node name="Exit-Door-Wall-R" type="CSGBox3D" parent="Level/Room1/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8782, 4.59181, 4.3411)
+use_collision = true
+size = Vector3(0.374023, 9.67773, 8.02173)
+
+[node name="Exit-Door-Wall-R2" type="CSGBox3D" parent="Level/Room1/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8782, 5.94752, -1.12937)
+use_collision = true
+size = Vector3(0.374023, 6.96631, 2.92928)
+
+[node name="Wall-front" type="CSGBox3D" parent="Level/Room1/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22261, 4.59181, 8.61997)
+use_collision = true
+size = Vector3(21.6068, 9.67773, 1)
+
+[node name="Floor Button Room" type="Node3D" parent="Level"]
+
+[node name="Door" parent="Level/Floor Button Room" instance=ExtResource("4_dwbse")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.273, 0, -1.098)
+
+[node name="Box" parent="Level/Floor Button Room" instance=ExtResource("3_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12271, -2.00829)
+
+[node name="Floor Button" parent="Level/Floor Button Room" instance=ExtResource("4_036b0")]
+transform = Transform3D(1.745, 0, 0, 0, 1.745, 0, 0, 0, 1.745, -1.75002, -0.00538355, -5.63994)
+
+[node name="Geometry" type="Node3D" parent="Level/Floor Button Room"]
+
+[node name="Wall-back" type="CSGBox3D" parent="Level/Floor Button Room/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.59181, -8.77272)
+use_collision = true
+size = Vector3(18.0977, 9.67773, 1)
+
+[node name="Other Wall" type="CSGBox3D" parent="Level/Floor Button Room/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42501, 4.59181, -0.237174)
+use_collision = true
+size = Vector3(0.374023, 9.67773, 17.1783)
+
+[node name="Exit-Door-Wall-L" type="CSGBox3D" parent="Level/Floor Button Room/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.37615, 4.59181, -5.56633)
+use_collision = true
+size = Vector3(0.374023, 9.67773, 5.9458)
+
+[node name="Exit-Door-Wall-R" type="CSGBox3D" parent="Level/Floor Button Room/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.37615, 4.59181, 4.3411)
+use_collision = true
+size = Vector3(0.374023, 9.67773, 8.02173)
+
+[node name="Exit-Door-Wall-R2" type="CSGBox3D" parent="Level/Floor Button Room/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.37615, 5.94752, -1.12937)
+use_collision = true
+size = Vector3(0.374023, 6.96631, 2.92928)
+
+[connection signal="touched" from="Level/Room1/Standing Button" to="Level/Room1/Door" method="toggle"]
+[connection signal="press" from="Level/Floor Button Room/Floor Button" to="Level/Floor Button Room/Door" method="turnon"]
+[connection signal="release" from="Level/Floor Button Room/Floor Button" to="Level/Floor Button Room/Door" method="turnoff"]

@@ -1,13 +1,38 @@
-extends StaticBody3D
+extends Node3D
 
-@export var direction : Vector3
-@export var speed = 2
-@export var closetime = 2
+@onready var anim: AnimationNodeStateMachinePlayback
 
-var og_pos : Vector3
+var is_open := false
+
 
 func _ready() -> void:
-	og_pos = position
+	anim = $AnimationTree.get("parameters/playback")
 
-func opendoor():
-	pass
+func toggle(_body):
+	if is_open == true:
+		is_open = false
+	else:
+		is_open = true
+	
+	if is_open == true:
+		anim.travel("Door_Open")
+	if is_open == false:
+		anim.travel("Door_Close")
+
+
+func turnon(body):
+	is_open = true
+	
+	if is_open == true:
+		anim.travel("Door_Open")
+	if is_open == false:
+		anim.travel("Door_Close")
+
+
+func turnoff(body):
+	is_open = false
+	
+	if is_open == true:
+		anim.travel("Door_Open")
+	if is_open == false:
+		anim.travel("Door_Close")
